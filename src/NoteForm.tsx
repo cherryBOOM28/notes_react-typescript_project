@@ -2,8 +2,7 @@ import { useRef, useState } from 'react'
 import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import CreatableReactSelect from 'react-select/creatable'
-import { NoteData } from './App'
-import { Tag } from './App'
+import type { NoteData, Tag } from './App'
 
 type NoteFormProps = {
   onSubmit: (data: NoteData) => void
@@ -45,6 +44,13 @@ export function NoteForm({ onSubmit }: NoteFormProps) {
                     value: tag.id,
                   }
                 })}
+                onChange={(tags) => {
+                  setSelectedTags(
+                    tags.map((tag) => {
+                      return { label: tag.label, id: tag.value }
+                    })
+                  )
+                }}
                 isMulti
               />
             </Form.Group>
